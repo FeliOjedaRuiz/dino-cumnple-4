@@ -1,0 +1,115 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+import pageBackground from "../Images/background.webp?url";
+import Cover from "../components/Cover.astro";
+
+const {
+  title = "Cumpleaños de Dino - 4 años",
+  description = "Estás invitado al cumple de Dino. ¡Te esperamos el 19 de septiembre de 2026!",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#7CC0DC" />
+    <title>{title}</title>
+
+    <!-- Canonical -->
+    <link rel="canonical" href={Astro.site} />
+
+    <!-- Open Graph (WhatsApp, Facebook, LinkedIn, iMessage, Telegram, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Cumpleaños de Dino" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.site} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:image" content={new URL('/images/og-cover.jpg', Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Invitación al cumpleaños de Dino - 19 de septiembre de 2026" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL('/images/og-cover.jpg', Astro.site)} />
+    <meta name="twitter:image:alt" content="Invitación al cumpleaños de Dino - 19 de septiembre de 2026" />
+
+    <!-- Google Fonts: Nunito + Quicksand -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lilita+One&family=Nunito:wght@400;600;700;800&family=Quicksand:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="relative min-h-screen bg-[#eff9fc]">
+    <!-- Atenuated global background image -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      <div
+        class="absolute inset-0 scale-105 bg-cover bg-center bg-no-repeat opacity-30 blur-sm"
+        style={`background-image: url('${pageBackground}')`}
+      ></div>
+      <div class="absolute inset-0 bg-white/15"></div>
+    </div>
+
+    <div class="relative z-10">
+      <slot />
+    </div>
+
+    <Cover />
+
+    <!-- Scroll reveal: fires fade-up animation when [data-reveal] enters viewport -->
+    <script>
+      (() => {
+        const prefersReduced = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+        if (prefersReduced) {
+          document.querySelectorAll("[data-reveal]").forEach((el) => {
+            el.classList.remove("reveal-hidden");
+          });
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              const el = entry.target as HTMLElement;
+              el.classList.add("animate-fade-up");
+              el.classList.remove("reveal-hidden");
+
+              const children = el.querySelectorAll("[data-reveal-child]");
+              for (let i = 0; i < children.length; i++) {
+                const child = children[i] as HTMLElement;
+                child.style.animationDelay = `${i * 100}ms`;
+                child.classList.add("animate-fade-up");
+                child.classList.remove("reveal-hidden");
+              }
+
+              observer.unobserve(el);
+            }
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -60px 0px" },
+        );
+
+        document
+          .querySelectorAll("[data-reveal]")
+          .forEach((el) => observer.observe(el));
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-celeste: #60a5fa;
+  --color-celeste-light: #93c5fd;
+  --color-celeste-dark: #2563eb;
+  --color-accent-rojo: #e74c3c;
+  --color-accent-verde: #27ae60;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #eff9fc;
+  @apply text-gray-800;
+  @apply font-quicksand;
+}
+
+h1, h2, h3, h4 {
+  @apply font-nunito;
+}
+
+/* ============================================
+   Accessibility: respect reduced motion (WCAG 2.3)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   Pause wiggle animation on hover/focus
+   ============================================ */
+@media (prefers-reduced-motion: no-preference) {
+  /* Pause wiggle on the inner span when the button receives hover/focus.
+     The wiggle class lives on the span, not the button — otherwise the
+     rotate transform would override the button's translateX centering. */
+  .wiggle-pause:hover > *,
+  .wiggle-pause:focus-visible > * {
+    animation-play-state: paused;
+  }
+}
+
+/* ============================================
+   Reveal on scroll: hidden until observer fires
+   ============================================ */
+.reveal-hidden {
+  opacity: 0;
+}
+
+/* ============================================
+   Entrance gating: everything behind the cover
+   stays frozen until the user presses "Abrir".
+   Cover.astro adds body.invitation-open on click,
+   which resumes all these animations exactly once.
+   ============================================ */
+body:not(.invitation-open) [data-entrance],
+body:not(.invitation-open) [data-entrance] * {
+  animation-play-state: paused !important;
+}

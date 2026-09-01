@@ -1,0 +1,35 @@
+---
+// Sticky bottom CTA that triggers the RSVP modal.
+// Mobile-first: on small screens it spans the width for thumb reach and
+// visibility; on md+ screens it collapses to a centered pill.
+// Dispatches a custom event that RSVPModal (React island) listens to.
+//
+// The full-width fixed shell owns positioning; the button owns its width.
+// This keeps mobile sizing deterministic and avoids mixing left/right
+// constraints with an intrinsic button width.
+---
+
+<div data-entrance class="fixed z-50 inset-x-0 bottom-4 md:bottom-6 px-4 flex justify-center motion-safe:animate-cta-enter-left">
+  <button
+    id="rsvp-cta"
+    type="button"
+    aria-label="Confirmar asistencia"
+    class="relative w-full md:w-auto px-6 py-4 md:px-8 md:py-3.5 rounded-full bg-gradient-to-b from-tren-rojo-400 to-tren-rojo-700 hover:from-tren-rojo-500 hover:to-tren-rojo-800 text-white font-fredoka font-bold text-base shadow-[0_4px_0_#7A1810] hover:shadow-[0_2px_0_#7A1810] hover:translate-y-0.5 active:translate-y-1 active:shadow-none transition-all duration-150 whitespace-nowrap flex items-center justify-center wiggle-pause"
+  >
+    <!-- Ping and wiggle share a 5s cycle: both are active during 0-10%,
+         then both rest until the next cycle. The 5s initial delay prevents
+         the CTA from animating immediately on page load. -->
+    <span
+      aria-hidden="true"
+      class="absolute inset-0 rounded-full bg-tren-rojo-400 opacity-50 motion-safe:animate-ping-sync pointer-events-none"
+    ></span>
+    <span class="relative motion-safe:animate-wiggle inline-block">Confirmar asistencia</span>
+  </button>
+</div>
+
+<script>
+  const cta = document.getElementById("rsvp-cta");
+  cta?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("open-rsvp-modal"));
+  });
+</script>

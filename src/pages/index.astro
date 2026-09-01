@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+
+import Hero from "../components/Hero.astro";
+import EventDetails from "../components/EventDetails.astro";
+import Gifts from "../components/Gifts.astro";
+import Location from "../components/Location.astro";
+import Footer from "../components/Footer.astro";
+import StickyCTA from "../components/StickyCTA.astro";
+import RSVPModal from "../components/RSVPModal";
+---
+
+<BaseLayout>
+  <!-- Full wrapper handling vertical rhythm on desktop -->
+  <div class="max-w-2xl mx-auto bg-white/20 md:bg-white/50 drop-shadow-lg">
+    <Hero />
+    <EventDetails />
+    <Gifts />
+    <Location />
+    <Footer />
+  </div>
+
+  <!-- Sticky bottom CTA (fixed, always visible) -->
+  <StickyCTA />
+
+  <!-- RSVP Modal (React island) -->
+  <RSVPModal client:idle />
+</BaseLayout>
