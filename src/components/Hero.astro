@@ -8,7 +8,7 @@ import Countdown from "./Countdown";
 
 <section
   data-entrance
-  class="relative w-full bg-no-repeat h-screen md:max-w-2xl md:mx-auto bg-center bg-cover"
+  class="relative w-full bg-no-repeat h-svh md:max-w-2xl md:mx-auto bg-center bg-cover"
   style={`background-image: url('${bgImage}')`}
   aria-label="Invitación"
 >
@@ -29,7 +29,7 @@ import Countdown from "./Countdown";
   </div>
 
   <!-- Fecha, countdown e indicador de scroll como un único conjunto visual -->
-  <div class="absolute inset-x-0 bottom-[130px] z-10 flex flex-col items-center gap-[clamp(0.25rem,1vw,0.75rem)] motion-safe:animate-fade-up" style="animation-delay: 900ms">
+  <div class="absolute inset-x-0 bottom-[clamp(100px,14vh,150px)] z-10 flex flex-col items-center gap-[clamp(0.25rem,1vw,0.75rem)] motion-safe:animate-fade-up" style="animation-delay: 900ms">
     <!-- <img
       src={dateTitleUrl}
       class="block w-[45%] max-w-[15rem] md:w-[29%] md:max-w-[12rem] h-auto mb-1"

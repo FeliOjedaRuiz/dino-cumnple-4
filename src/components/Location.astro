@@ -1,5 +1,5 @@
 ---
-import { ADDRESS, GOOGLE_MAPS_URL } from '../lib/config';
+import { ADDRESS, GOOGLE_MAPS_URL, GOOGLE_MAPS_EMBED_URL } from '../lib/config';
 import locationBackground from '../Images/fondo-location.png?url';
 ---
 
@@ -50,7 +50,7 @@ import locationBackground from '../Images/fondo-location.png?url';
 					style="border: 0;"
 					loading="lazy"
 					allowfullscreen
-					src={`https://www.google.com/maps/embed/v1/place?key=REDACTED&q=${encodeURIComponent(GOOGLE_MAPS_URL.replace('https://www.google.com/maps?q=', ''))}`}
+					src={GOOGLE_MAPS_EMBED_URL}
 				></iframe>
 				<a
 					href={GOOGLE_MAPS_URL}

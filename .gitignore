@@ -1,0 +1,24 @@
+node_modules
+
+# Build output caches (Astro)
+.astro
+
+# Netlify local state
+.netlify
+
+# Environment variables and secrets — do NOT commit
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode
+.idea
