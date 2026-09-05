@@ -16,6 +16,7 @@ const TIMEOUT_MS = 10_000;
 
 export async function postRSVP(data: RSVPData): Promise<RSVPResult> {
   const endpoint =
+    import.meta.env.PUBLIC_RSVP_ENDPOINT ||
     "https://script.google.com/macros/s/AKfycbyYo63VJiQ33Z_D0F4SONPpcqfe73vopUSOfLIVVPUNP_HqlD6dXEE6okyezqzz7jQt/exec";
 
   try {
