@@ -9,11 +9,7 @@
  * Google Sheet ID (the long string in the Sheet URL).
  *
  * The Sheet must have a header row:
- *   Timestamp | Nombre del niño | Adultos | Alergias | Hermanos
- *
- * The script creates the header on first run and is backward-compatible with
- * sheets that already have the first 4 columns; in that case it appends a new
- * "Hermanos" column header to the right without shifting existing data.
+ *   Timestamp | Nombre del niño | Hermanos | Adultos | Alergias
  */
 
 const SHEET_ID = "1tWkAFSO5HWx4ghr4KzVylt7d7WUX0p7f-5nNnS8Zh-o"; // ← Replace with your Sheet ID
@@ -21,9 +17,9 @@ const SHEET_NAME = "RSVPs - Cumple Dino 4"; // Sheet tab name
 const HEADER = [
   "Timestamp",
   "Nombre del niño",
-  "Adultos",    
-  "Alergias",
   "Hermanos",
+  "Adultos",
+  "Alergias",
 ];
 
 /**
@@ -104,9 +100,9 @@ function doPost(e) {
     sheet.appendRow([
       timestamp,
       childName,
+      siblingsCount,
       adultsCount,
       allergens,
-      siblingsCount,
     ]);
 
     return jsonResponse(200, {

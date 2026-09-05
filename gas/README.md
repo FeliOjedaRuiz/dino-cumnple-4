@@ -20,11 +20,9 @@ Manual deploy only. No CI/CD for the GAS side.
 
    | A | B | C | D | E |
    |---|---|---|---|---|
-   | Timestamp | Nombre del niño | Adultos | Alergias | Hermanos |
+   | Timestamp | Nombre del niño | Hermanos | Adultos | Alergias |
 
-   > The script can also create this header automatically on the first run. If
-   > your sheet already has the older 4-column header, the script will append
-   > the "Hermanos" column (E) without shifting existing data.
+   > The script can also create this header automatically on the first run.
 
 5. Copy the **Sheet ID** from the URL:
    ```
@@ -119,7 +117,7 @@ Expected response:
 ```
 
 ### Check your Sheet:
-After a successful POST, the Sheet should have a new row with timestamp, name, adult count, siblings count, and (optional) allergens.
+After a successful POST, the Sheet should have a new row with timestamp, name, siblings count, adult count, and (optional) allergens.
 
 ---
 
